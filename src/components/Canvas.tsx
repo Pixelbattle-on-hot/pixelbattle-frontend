@@ -1,5 +1,3 @@
 export function Canvas() {
-  return (
-    <canvas></canvas>
-  )
+  return <canvas className="size-96 bg-white"></canvas>;
 }
