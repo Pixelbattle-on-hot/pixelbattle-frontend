@@ -1,11 +1,9 @@
 import { useState } from "react";
-import "./App.css";
 import { Palette, ActiveColorContext } from "./components/Palette.tsx";
 import { Footer } from "./components/Footer.tsx";
-import "./App.css";
 import { Canvas } from "./components/Canvas.tsx";
 
-function App() {
+export function Home() {
   const [currentActiveColor, setCurrentActiveColor] = useState<number>(-1);
   return (
     <ActiveColorContext.Provider value={currentActiveColor}>
@@ -16,7 +14,7 @@ function App() {
           <div>(11, 22) 0.48 USDT</div>
           <button>Paint</button>
         </div>
-        <div className="flex w-full flex-col bg-lightBackground">
+        <div className="bg-lightBackground flex w-full flex-col">
           <Palette setActiveColorContext={setCurrentActiveColor} />
           <Footer />
         </div>
@@ -24,5 +22,3 @@ function App() {
     </ActiveColorContext.Provider>
   );
 }
-
-export default App;
