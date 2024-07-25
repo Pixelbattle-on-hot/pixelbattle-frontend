@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Header() {
   return (
     <header className="flex w-full justify-between p-4 text-white">
@@ -7,7 +9,9 @@ export function Header() {
           <span className="absolute left-6 top-8 z-10 text-sm">250</span>
         </div>
         <div className="flex flex-col">
-          <img src="/topup-btn.png" className="size-8" alt={"withdraw"} />
+          <Link to="/top-up">
+            <img src="/topup-btn.png" className="size-8" alt={"withdraw"} />
+          </Link>
           <img src="/withdraw-btn.png" className="size-8" alt={"withdraw"} />
         </div>
       </div>
