@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
-
 :root {
     --light-background: #ffffe1;
     --blue: #1F3057;
@@ -13,7 +11,6 @@
 
 
 body {
-    font-family: 'Orbitron', sans-serif;
     background-color: var(--blue);
     padding: 0;
     margin: 0;
