@@ -1,8 +1,9 @@
 import "./palette.css";
 import {useState} from "react";
+import {colors} from "../constants";
+import { createContext, useContext } from 'react';
 
 function PaletteColorButton({ n, color, isActive, onClickCallback }: { n: number, color: string, isActive: boolean, onClickCallback: (n: number) => void }) {
-  console.log(n);
   return (
     <button
       className={`palette-color-button ${isActive ? "active" : ""}`}
@@ -12,30 +13,19 @@ function PaletteColorButton({ n, color, isActive, onClickCallback }: { n: number
   )
 }
 
-export function Palette() {
-  const colors = {
-    0: "#000000",
-    1: "#454546",
-    2: "#C1C3C7",
-    3: "#FEF2E2",
-    4: "#FCE920",
-    5: "#FFA304",
-    6: "#FECCA9",
-    7: "#B04E39",
-    8: "#FC76AC",
-    9: "#FF0053",
-    10: "#827699",
-    11: "#6A2D53",
-    12: "#31AAFA",
-    13: "#20347A",
-    14: "#018233",
-    15: "#1BCE49",
-  }
+export const ActiveColorContext = createContext(-1);
 
+export function Palette({ setActiveColorContext }: { setActiveColorContext: (n: number) => void}) {
   const [activeColor, setActiveColor ] = useState<number>(-1);
 
   const activeColorHandler = (n: number) => {
+    if (activeColor === n) {
+      setActiveColor(-1);
+      setActiveColorContext(-1);
+      return;
+    }
     setActiveColor(n);
+    setActiveColorContext(n);
   }
 
   return (
