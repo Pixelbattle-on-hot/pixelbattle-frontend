@@ -1,0 +1,22 @@
+.palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: var(--light-background);
+    padding: 10px;
+}
+
+.palette-color-button {
+    flex: 1 0 11%;
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    border: 3px solid var(--palette-color-border-not-selected);
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.palette-color-button.active {
+    border: 3px solid var(--palette-color-border-selected);
+}
