@@ -19,6 +19,11 @@ export function Palette({ setActiveColorContext }: { setActiveColorContext: (n: 
   const [activeColor, setActiveColor ] = useState<number>(-1);
 
   const activeColorHandler = (n: number) => {
+    if (activeColor === n) {
+      setActiveColor(-1);
+      setActiveColorContext(-1);
+      return;
+    }
     setActiveColor(n);
     setActiveColorContext(n);
   }
