@@ -3,6 +3,9 @@ import { Palette, ActiveColorContext } from "./components/Palette.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { Canvas } from "./components/Canvas.tsx";
 import { Header } from "./components/Header.tsx";
+// @ts-expect-error Buffer used to fix HereWallet import
+import { Buffer } from "buffer/"; // eslint-disable-line
+import { HereWallet } from "@here-wallet/core";
 
 export function Home() {
   const [currentActiveColor, setCurrentActiveColor] = useState<number>(-1);

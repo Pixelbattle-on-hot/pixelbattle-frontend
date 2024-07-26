@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixelbattle</title>
+    <script>window.global = window;</script>
+    <script type="module">
+      import { Buffer } from "buffer/"; // <-- no typo here ("/")
+      import process from "process";
+
+      window.Buffer = Buffer;
+      window.process = process;
+    </script>
   </head>
   <body>
     <div id="root"></div>
