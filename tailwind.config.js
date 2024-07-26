@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         lightBackground: "#ffffe1",
+        blueBackground: "#1F3057",
+        borderNotSelected: "#B3ACA6",
+        warn: "#FC024B",
       },
     },
   },

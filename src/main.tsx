@@ -4,11 +4,16 @@ import { Home } from "./Home.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@fontsource-variable/orbitron";
 import "./index.css";
+import { TopUp } from "./TopUp.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/top-up",
+    element: <TopUp />,
   },
 ]);
 
