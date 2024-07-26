@@ -8,7 +8,7 @@ export function Home() {
   const [currentActiveColor, setCurrentActiveColor] = useState<number>(-1);
   return (
     <ActiveColorContext.Provider value={currentActiveColor}>
-      <main className="flex h-dvh flex-col items-center justify-between">
+      <main className="flex min-h-dvh flex-col items-center justify-between gap-4">
         <Header />
         <Canvas />
         <div className="flex flex-col items-center gap-5">
