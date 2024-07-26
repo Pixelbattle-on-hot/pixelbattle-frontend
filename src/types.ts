@@ -15,5 +15,3 @@ export type Color =
   | 13
   | 14
   | 15;
-
-export type PixelsField = number[][];

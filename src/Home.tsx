@@ -3,7 +3,6 @@ import { Palette, ActiveColorContext } from "./components/Palette.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { Canvas } from "./components/Canvas.tsx";
 import { Header } from "./components/Header.tsx";
-// @ts-expect-error Buffer used to fix HereWallet import
 import { Buffer } from "buffer/"; // eslint-disable-line
 import { HereWallet } from "@here-wallet/core";
 
@@ -19,11 +18,11 @@ export function Home() {
             <span>(11, 22)</span>
             <span>0.48 USDT</span>
           </div>
-          <button className="bg-lightBackground text-blueBackground w-fit rounded-full px-12 py-2 text-4xl">
+          <button className="text-blueBackground w-fit rounded-full bg-lightBackground px-12 py-2 text-4xl">
             Paint
           </button>
         </div>
-        <div className="bg-lightBackground flex w-full flex-col">
+        <div className="flex w-full flex-col bg-lightBackground">
           <Palette setActiveColorContext={setCurrentActiveColor} />
           <Footer />
         </div>

@@ -6,7 +6,6 @@ import {
   defaultColor,
   colors,
 } from "../constants";
-import { PixelsField } from "../types.ts";
 
 export function Canvas() {
   const canvasRef = useRef(null);
@@ -17,6 +16,8 @@ export function Canvas() {
       .fill(defaultColor)
       .map(() => new Array(cellsOnOneSide).fill(defaultColor)),
   );
+  const [paintedPixel, setPaintedPixel] =
+    useState<[number, number, number, number]>(null); // x, y, paintedColor, prevColor
 
   const drawCell = (ctx, x, y, colorNumber) => {
     const cellSize = ctx.canvas.width / cellsOnOneSide;
@@ -57,7 +58,6 @@ export function Canvas() {
     const context = canvas.getContext("2d");
     setShowGrid(activeColor !== -1);
     drawPixelsField(context, pixelsField);
-    // drawCell(context, 0, 0, 12);
   }, [activeColor, pixelsField]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export function Canvas() {
     drawPixelsField(context, pixelsField);
   }, [showGrid]);
 
-  function getCursorPosition(canvas, event) {
+  function getCursorPosition(canvas, event): [number, number, number, number] {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
