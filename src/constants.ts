@@ -2,7 +2,7 @@ export const colors = {
   0: "#000000",
   1: "#454546",
   2: "#C1C3C7",
-  3: "#FEF2E2",
+  3: "#FFFFFF",
   4: "#FCE920",
   5: "#FFA304",
   6: "#FECCA9",
@@ -15,4 +15,8 @@ export const colors = {
   13: "#20347A",
   14: "#018233",
   15: "#1BCE49",
-}
+};
+
+export const cellsOnOneSide = 100;
+export const canvasSideSize = 1000;
+export const defaultColor = 3;
