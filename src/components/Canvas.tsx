@@ -75,7 +75,7 @@ export function Canvas({
     return [cellX, cellY];
   };
 
-  const paintCell = (ctx, cellX, cellY) => {
+  const paintCell = (cellX, cellY) => {
     const newPixelsField = pixelsField.map((row) =>
       row.map((pixel) => ({ ...pixel }) as Pixel),
     );
@@ -171,11 +171,11 @@ export function Canvas({
         }
         const canvas = canvasRef.current;
         const context = canvas.getContext("2d");
-        const cellPosition = getCellPosition(
+        const [x, y] = getCellPosition(
           context,
           ...getCursorPosition(canvas, e),
         );
-        paintCell(context, ...cellPosition);
+        paintCell(x, y);
       }}
     ></canvas>
   );

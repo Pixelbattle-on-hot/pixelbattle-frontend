@@ -47,10 +47,6 @@ export function Home() {
               className="w-fit rounded-full bg-lightBackground px-12 py-2 text-4xl text-blueBackground disabled:opacity-50"
               disabled={!currentPaintedPixel}
               onClick={() => {
-                // const x = currentPaintedPixel.x;
-                // const y = currentPaintedPixel.y;
-                // const prevColor = currentPaintedPixel.prevColor;
-                // const color = currentPaintedPixel.content.color;
                 setCurrentPaintedPixel(null);
                 setCurrentActiveColor(-1);
                 // TODO: send transaction
