@@ -109,7 +109,19 @@ export function Canvas({
         paintedPixelContextRef.current?.x === y &&
         paintedPixelContextRef.current?.y === i
       ) {
-        return paintedPixelContextRef.current?.content;
+        const newCurrentPixel = {
+          ...paintedPixelContextRef.current?.content,
+          price: pixel.price,
+        };
+        if (paintedPixelContextRef.current?.content.price !== pixel.price) {
+          setPaintedPixelCallback(
+            y,
+            i,
+            newCurrentPixel,
+            paintedPixelContextRef.current?.prevColor,
+          );
+        }
+        return newCurrentPixel;
       } else {
         return pixel;
       }
