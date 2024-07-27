@@ -20,3 +20,5 @@ export const colors = {
 export const cellsOnOneSide = 100;
 export const canvasSideSize = 1000;
 export const defaultColor = 3;
+
+export const defaultPrice = 0.01;
