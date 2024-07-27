@@ -28,9 +28,18 @@ export function Home() {
                   ? `(${currentPaintedPixel[0]}, ${currentPaintedPixel[1]})`
                   : ""}
               </span>
-              <span>0.48 USDT</span>
+              <span>0.48 USDT</span> {/* TODO: get price and show here */}
             </div>
-            <button className="w-fit rounded-full bg-lightBackground px-12 py-2 text-4xl text-blueBackground">
+            <button
+              className="w-fit rounded-full bg-lightBackground px-12 py-2 text-4xl text-blueBackground disabled:opacity-50"
+              disabled={!currentPaintedPixel}
+              onClick={() => {
+                const [x, y, color, prevColor] = currentPaintedPixel!;
+                setCurrentPaintedPixel(null);
+                setCurrentActiveColor(-1);
+                // TODO: send transaction
+              }}
+            >
               Paint
             </button>
           </div>
