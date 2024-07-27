@@ -1,5 +1,5 @@
 import "./palette.css";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { colors } from "../constants";
 import { createContext } from "react";
 
@@ -30,15 +30,13 @@ export function Palette({
 }: {
   setActiveColorContext: (n: number) => void;
 }) {
-  const [activeColor, setActiveColor] = useState<number>(-1);
+  const activeColorContext = useContext(ActiveColorContext);
 
   const activeColorHandler = (n: number) => {
-    if (activeColor === n) {
-      setActiveColor(-1);
+    if (activeColorContext === n) {
       setActiveColorContext(-1);
       return;
     }
-    setActiveColor(n);
     setActiveColorContext(n);
   };
 
@@ -53,7 +51,7 @@ export function Palette({
               n={i}
               color={color}
               key={i}
-              isActive={activeColor === i}
+              isActive={activeColorContext === i}
               onClickCallback={activeColorHandler}
             />
           ))}
@@ -66,7 +64,7 @@ export function Palette({
               n={i + 8}
               color={color}
               key={i + 8}
-              isActive={activeColor === i + 8}
+              isActive={activeColorContext === i + 8}
               onClickCallback={activeColorHandler}
             />
           ))}

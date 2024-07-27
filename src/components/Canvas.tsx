@@ -1,4 +1,4 @@
-import { useEffect, useRef, useContext, useState } from "react";
+import { useEffect, useRef, useContext, useState, createContext } from "react";
 import { ActiveColorContext } from "./Palette.tsx";
 import {
   canvasSideSize,
@@ -7,17 +7,29 @@ import {
   colors,
 } from "../constants";
 
-export function Canvas() {
+export const CurrentPaintedPixelContext = createContext<
+  [number, number, number, number] | null // // x, y, paintedColor, prevColor
+>(null);
+
+export function Canvas({
+  setPaintedPixelCallback,
+}: {
+  setPaintedPixelCallback: (
+    x: number,
+    y: number,
+    color: number,
+    prevColor: number,
+  ) => void;
+}) {
   const canvasRef = useRef(null);
   const activeColor = useContext(ActiveColorContext);
+  const paintedPixelContext = useContext(CurrentPaintedPixelContext);
   const [showGrid, setShowGrid] = useState(activeColor !== -1);
   const [pixelsField, setPixelsField] = useState(
     new Array(cellsOnOneSide)
       .fill(defaultColor)
       .map(() => new Array(cellsOnOneSide).fill(defaultColor)),
   );
-  const [paintedPixel, setPaintedPixel] =
-    useState<[number, number, number, number]>(null); // x, y, paintedColor, prevColor
 
   const drawCell = (ctx, x, y, colorNumber) => {
     const cellSize = ctx.canvas.width / cellsOnOneSide;
@@ -48,8 +60,24 @@ export function Canvas() {
     const canvasY = y * kheight;
     const cellX = Math.floor(canvasX / cellSize);
     const cellY = Math.floor(canvasY / cellSize);
-    const newPixelsField = [...pixelsField];
+    const newPixelsField = pixelsField.map((row) => row.slice());
+
+    if (paintedPixelContext) {
+      console.log(paintedPixelContext);
+      const [prevX, prevY, paintedColor, prevColor] = paintedPixelContext;
+      if (prevX === cellX && prevY === cellY) {
+        pixelsField[cellX][cellY] = defaultColor;
+      } else {
+        newPixelsField[prevX][prevY] = prevColor;
+      }
+    }
     newPixelsField[cellX][cellY] = activeColor;
+    setPaintedPixelCallback(
+      cellX,
+      cellY,
+      activeColor,
+      pixelsField[cellX][cellY],
+    );
     setPixelsField(newPixelsField);
   };
 
