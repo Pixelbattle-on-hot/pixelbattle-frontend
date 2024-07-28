@@ -3,9 +3,8 @@ import { Palette, ActiveColorContext } from "./components/Palette.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { Canvas, CurrentPaintedPixelContext } from "./components/Canvas.tsx";
 import { Header } from "./components/Header.tsx";
-import { Buffer } from "buffer/"; // eslint-disable-line
-import { HereWallet } from "@here-wallet/core";
 import { Pixel } from "./types.ts";
+import { useHotWallet } from "./HotWalletProvider.tsx";
 
 export function Home() {
   const [currentActiveColor, setCurrentActiveColor] = useState<number>(-1);
@@ -15,6 +14,7 @@ export function Home() {
     content: Pixel;
     prevColor: number;
   } | null>(null);
+  const { user, login } = useHotWallet();
   return (
     <ActiveColorContext.Provider value={currentActiveColor}>
       <CurrentPaintedPixelContext.Provider value={currentPaintedPixel}>
@@ -45,14 +45,18 @@ export function Home() {
             </div>
             <button
               className="w-fit rounded-full bg-lightBackground px-12 py-2 text-4xl text-blueBackground disabled:opacity-50"
-              disabled={!currentPaintedPixel}
-              onClick={() => {
-                setCurrentPaintedPixel(null);
-                setCurrentActiveColor(-1);
-                // TODO: send transaction
-              }}
+              disabled={user == null ? false : !currentPaintedPixel}
+              onClick={
+                user == null
+                  ? login
+                  : () => {
+                      setCurrentPaintedPixel(null);
+                      setCurrentActiveColor(-1);
+                      // TODO: send transaction
+                    }
+              }
             >
-              Paint
+              {user != null ? "Paint" : "Connect Wallet"}
             </button>
           </div>
           <div className="flex w-full flex-col bg-lightBackground">

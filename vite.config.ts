@@ -7,6 +7,15 @@ export default defineConfig({
   resolve: {
     alias: {
       process: "process/browser",
+      crypto: "crypto-browserify",
+      http: "stream-http",
+      https: "https-browserify",
+      util: "util/",
+      buffer: "buffer/",
+      vm: "vm-browserify",
+      stream: "stream-browserify",
+      url: "url/",
+      events: "events/",
     },
   },
 });
