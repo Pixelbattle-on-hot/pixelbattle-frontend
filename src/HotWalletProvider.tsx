@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useState, useContext } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 import { HereWallet } from "@here-wallet/core";
 
 type ContextType = {
@@ -8,7 +15,7 @@ type ContextType = {
   user: { nearAccountId: string } | null;
 };
 
-const HotContext = React.createContext<ContextType>({
+const HotContext = createContext<ContextType>({
   here: null,
   user: null,
   login: () => {},
@@ -17,11 +24,7 @@ const HotContext = React.createContext<ContextType>({
 
 export const useHotWallet = () => useContext(HotContext);
 
-export const HotWalletProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const HotWalletProvider = ({ children }: { children: ReactNode }) => {
   const [here, setHere] = useState<ContextType["here"]>(null);
   const [user, setUser] = useState<ContextType["user"]>(null);
 

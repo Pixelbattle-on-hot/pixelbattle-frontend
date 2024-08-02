@@ -5,6 +5,7 @@ import { Canvas, CurrentPaintedPixelContext } from "./components/Canvas.tsx";
 import { Header } from "./components/Header.tsx";
 import { Pixel } from "./types.ts";
 import { useHotWallet } from "./HotWalletProvider.tsx";
+import { utils } from "near-api-js";
 
 export function Home() {
   const [currentActiveColor, setCurrentActiveColor] = useState<number>(-1);
@@ -14,7 +15,7 @@ export function Home() {
     content: Pixel;
     prevColor: number;
   } | null>(null);
-  const { user, login } = useHotWallet();
+  const { here, user, login } = useHotWallet();
   return (
     <ActiveColorContext.Provider value={currentActiveColor}>
       <CurrentPaintedPixelContext.Provider value={currentPaintedPixel}>
@@ -49,9 +50,26 @@ export function Home() {
               onClick={
                 user == null
                   ? login
-                  : () => {
+                  : async () => {
                       setCurrentPaintedPixel(null);
                       setCurrentActiveColor(-1);
+                      // @ts-ignore
+                      await here.signAndSendTransaction({
+                        actions: [
+                          {
+                            type: "FunctionCall",
+                            params: {
+                              color: currentActiveColor,
+                              position_x: currentPaintedPixel.x,
+                              position_y: currentPaintedPixel.y,
+                            },
+                            deposit:
+                              currentPaintedPixel.content.price *
+                              Math.pow(10, 24),
+                          },
+                        ],
+                        receiverId: "donate.near",
+                      });
                       // TODO: send transaction
                     }
               }
