@@ -2,10 +2,8 @@ import {
   getContract,
   getIsGameFinished,
   getNumberOfBlocksUnchanged,
-  isGameFinished,
 } from "../contract.ts";
 import { useEffect, useState } from "react";
-import { cellsOnOneSide } from "../constants.ts";
 
 export function Header() {
   const [contract, setContract] = useState(null);
