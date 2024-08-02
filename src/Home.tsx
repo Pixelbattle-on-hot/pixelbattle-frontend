@@ -6,6 +6,7 @@ import { Header } from "./components/Header.tsx";
 import { Pixel } from "./types.ts";
 import { useHotWallet } from "./HotWalletProvider.tsx";
 import { utils } from "near-api-js";
+import { contractName } from "./constants.ts";
 
 export function Home() {
   const [currentActiveColor, setCurrentActiveColor] = useState<number>(-1);
@@ -72,9 +73,8 @@ export function Home() {
                             },
                           },
                         ],
-                        receiverId: "donate.near",
+                        receiverId: contractName,
                       });
-                      // TODO: send transaction
                     }
               }
             >

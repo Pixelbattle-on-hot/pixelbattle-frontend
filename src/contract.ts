@@ -1,9 +1,8 @@
 import { connect, Contract, keyStores } from "near-api-js";
 import { Pixel } from "./types.ts";
-import { cellsOnOneSide, defaultColor } from "./constants.ts";
+import { cellsOnOneSide, contractName, defaultColor } from "./constants.ts";
 
 export async function getContract() {
-  const contractName = "pixel_battle.testnet";
   const connectionConfig = {
     networkId: "testnet",
     keyStore: new keyStores.BrowserLocalStorageKeyStore(),
@@ -17,15 +16,18 @@ export async function getContract() {
   const nearConnection = await connect(connectionConfig);
   // const response = await contract.view_method_name({ arg_name: "arg_value" });
 
-  const account = await nearConnection.account("sender-account.testnet");
+  const account = await nearConnection.account("sender-account.near");
   return new Contract(account, contractName, {
     changeMethods: [],
-    viewMethods: ["get_pixel", "get_field_row"],
+    viewMethods: [
+      "get_pixel",
+      "get_field_row",
+      "number_of_blocks_unchanged",
+      "is_game_finished",
+    ],
     useLocalViewExecution: false,
   });
 }
-
-// const response = await contract.view_method_name({ arg_name: "arg_value" });
 
 export async function getPixel(contract, x, y) {
   const data = await contract.get_pixel({ position_x: x, position_y: y });
@@ -52,4 +54,12 @@ export async function getFieldRow(contract, y) {
     } as Pixel;
   });
   return to_return;
+}
+
+export async function getNumberOfBlocksUnchanged(contract): Promise<number> {
+  return await contract.number_of_blocks_unchanged();
+}
+
+export async function getIsGameFinished(contract): Promise<boolean> {
+  return await contract.is_game_finished();
 }
