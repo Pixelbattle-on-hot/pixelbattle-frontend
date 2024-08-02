@@ -59,13 +59,17 @@ export function Home() {
                           {
                             type: "FunctionCall",
                             params: {
-                              color: currentActiveColor,
-                              position_x: currentPaintedPixel.x,
-                              position_y: currentPaintedPixel.y,
+                              deposit: utils.format.parseNearAmount(
+                                currentPaintedPixel.content.price.toString(),
+                              ),
+                              methodName: "set_pixel",
+                              args: {
+                                color: currentActiveColor,
+                                position_x: currentPaintedPixel.x,
+                                position_y: currentPaintedPixel.y,
+                              },
+                              gas: "300000000000000",
                             },
-                            deposit:
-                              currentPaintedPixel.content.price *
-                              Math.pow(10, 24),
                           },
                         ],
                         receiverId: "donate.near",
