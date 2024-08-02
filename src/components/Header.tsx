@@ -19,7 +19,9 @@ export function Header() {
             clearInterval(interval);
             return;
           }
-          setBlocksWithoutActions(await getNumberOfBlocksUnchanged(contract));
+          const numberOfBlocksUnchanged =
+            await getNumberOfBlocksUnchanged(contract);
+          setBlocksWithoutActions(numberOfBlocksUnchanged);
         }, 1000);
       });
     }

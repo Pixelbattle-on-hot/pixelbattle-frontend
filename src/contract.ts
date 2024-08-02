@@ -4,12 +4,12 @@ import { cellsOnOneSide, contractName, defaultColor } from "./constants.ts";
 
 export async function getContract() {
   const connectionConfig = {
-    networkId: "testnet",
-    keyStore: new keyStores.BrowserLocalStorageKeyStore(),
-    nodeUrl: "https://rpc.testnet.near.org",
-    walletUrl: "https://testnet.mynearwallet.com/",
-    helperUrl: "https://helper.testnet.near.org",
-    explorerUrl: "https://testnet.nearblocks.io",
+    networkId: "mainnet",
+    keyStore: new keyStores.BrowserLocalStorageKeyStore(), // first create a key store
+    nodeUrl: "https://rpc.mainnet.near.org",
+    walletUrl: "https://wallet.mainnet.near.org",
+    helperUrl: "https://helper.mainnet.near.org",
+    explorerUrl: "https://nearblocks.io",
   };
 
   // connect to NEAR
