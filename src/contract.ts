@@ -50,7 +50,7 @@ export async function getFieldRow(contract, y) {
     const i = pixel.position_y;
     to_return[i] = {
       color: pixel.color,
-      price: utils.format.formatNearAmount(pixel.price),
+      price: parseFloat(utils.format.formatNearAmount(pixel.price)),
       owner: pixel.owner,
     } as Pixel;
   });
