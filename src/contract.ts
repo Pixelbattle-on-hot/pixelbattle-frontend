@@ -1,6 +1,7 @@
 import { connect, Contract, keyStores } from "near-api-js";
 import { Pixel } from "./types.ts";
 import { cellsOnOneSide, contractName, defaultColor } from "./constants.ts";
+import { utils } from "near-api-js";
 
 export async function getContract() {
   const connectionConfig = {
@@ -49,7 +50,7 @@ export async function getFieldRow(contract, y) {
     const i = pixel.position_y;
     to_return[i] = {
       color: pixel.color,
-      price: pixel.price,
+      price: utils.format.formatNearAmount(pixel.price),
       owner: pixel.owner,
     } as Pixel;
   });
