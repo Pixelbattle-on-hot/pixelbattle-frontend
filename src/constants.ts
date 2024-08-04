@@ -21,7 +21,7 @@ export const cellsOnOneSide = 100;
 export const canvasSideSize = 1000;
 export const defaultColor = 3;
 
-export const defaultPrice = 0.01;
+export const defaultPrice = 0.001;
 
 export const contractName =
   "a883d11d93882556699dd83a621f3476fc89f47328a9a8f1d20dc3415011bef1";
